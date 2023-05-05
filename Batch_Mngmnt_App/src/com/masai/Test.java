@@ -11,12 +11,13 @@ import com.masai.entity.Batches;
 public class Test {
 
 	public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
-	
-		ObjectInputStream oos = new ObjectInputStream(new FileInputStream("BatchFile.ser"));
-		Map<String , Batches> ma = null;
-		ma = (Map<String , Batches>) oos.readObject();
-		System.err.println(ma);
-		oos.close();
+	double s =(double) 3/2;
+		System.out.println( s );
+//		ObjectInputStream oos = new ObjectInputStream(new FileInputStream("BatchFile.ser"));
+//		Map<String , Batches> ma = null;
+//		ma = (Map<String , Batches>) oos.readObject();
+//		System.err.println(ma);
+//		oos.close();
 		
 	}
 }

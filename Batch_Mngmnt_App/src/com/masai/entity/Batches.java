@@ -3,14 +3,24 @@ package com.masai.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import com.masai.utility.GenerateFacID;
+
 public class Batches implements Serializable{
 
 	private String id;
 	private String courseName;
 	private int noOfSeats;
-	private LocalDate startDate;
+	private String startDate;
 	private int duration;
-	public Batches(String id, String courseName, int noOfSeats, LocalDate startDate, int duration) {
+//	public Batches( String courseName, int noOfSeats, String startDate, int duration) {
+//		super();
+//		this.id = courseName+"_"+GenerateFacID.generateID();
+//		this.courseName = courseName;
+//		this.noOfSeats = noOfSeats;
+//		this.startDate = startDate;
+//		this.duration = duration;
+//	}
+	public Batches(String id, String courseName, int noOfSeats, String startDate, int duration) {
 		super();
 		this.id = id;
 		this.courseName = courseName;
@@ -39,10 +49,10 @@ public class Batches implements Serializable{
 	public void setNoOfSeats(int noOfSeats) {
 		this.noOfSeats = noOfSeats;
 	}
-	public LocalDate getStartDate() {
+	public String getStartDate() {
 		return startDate;
 	}
-	public void setStartDate(LocalDate startDate) {
+	public void setStartDate(String startDate) {
 		this.startDate = startDate;
 	}
 	public int getDuration() {
