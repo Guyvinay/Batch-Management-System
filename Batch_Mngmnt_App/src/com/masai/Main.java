@@ -3,6 +3,7 @@ package com.masai;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -14,6 +15,8 @@ import com.masai.exceptions.EmptyListException;
 import com.masai.exceptions.InvalidArugumentException;
 import com.masai.exceptions.InvalidDetailsException;
 import com.masai.exceptions.WrongCredsException;
+import com.masai.services.BatchServiceExecut;
+import com.masai.services.BatchServices;
 import com.masai.services.FacultyServiceExcecut;
 import com.masai.services.FacultyServices;
 import com.masai.utility.AdminCred;
@@ -28,6 +31,7 @@ public class Main {
 //		System.out.println(batches);
 		adminLoginMethod(sc);
 		FacultyServices fac = new FacultyServiceExcecut();
+		BatchServices batchS = new BatchServiceExecut();
 		int opt = 0;
 		do {
 				System.out.println("Press '1' to view all faculty");
@@ -36,11 +40,16 @@ public class Main {
 				switch(opt) {
 				case 1 : 
 					adminViewAllFaculties(faculty , fac);
+				case 2 :
+					String addStatus = adminCreateNewBatch(sc , batches , batchS);
+					System.out.println(addStatus);
 				}
 				
 		}while(opt<=1);
 		
 	}
+	
+	
 	public static void adminViewAllFaculties(Map<String , Faculty> faculty , FacultyServices fac) throws EmptyListException {
 		fac.adminViewAllFac(faculty);
 	}
@@ -58,6 +67,29 @@ public class Main {
 			throw new InvalidDetailsException("Entered Credentials are not in place.");
 		  }
 		}
+	
+	public static String adminCreateNewBatch(Scanner sc , Map<String , Batches> batches , BatchServices batchS) {
+		String string = null;
+		
+		System.out.println("id");
+		String id = sc.nextLine();
+		System.out.println("courseName");
+		String courseName = sc.nextLine();
+		System.out.println("Number of seats");
+		int noOfSeats = sc.nextInt();
+		System.out.println("Start Date");
+		String localDate = sc.nextLine();
+		System.out.println("Duration");
+		int duration = sc.nextInt();
+		batchS.createNewBatch(id , courseName, noOfSeats, localDate , duration  );
+		return null;
+		
+	}
+	
+	
+	
+	
+	
 	
 	public static void facultyActivity(Scanner sc  , Map<String , Faculty> faculty , Map<String , Batches> batches) throws WrongCredsException {
 		// TODO Auto-generated method stub
