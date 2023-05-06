@@ -20,7 +20,7 @@ public class Batches implements Serializable{
 //		this.startDate = startDate;
 //		this.duration = duration;
 //	}
-	public Batches(String id, String courseName, int noOfSeats, String startDate, int duration) {
+	public Batches(String id , String courseName  , int noOfSeats  , String startDate , int duration) {
 		super();
 		this.id = id;
 		this.courseName = courseName;
