@@ -3,13 +3,14 @@ package com.masai;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.time.LocalDate;
+//import java.time.LocalDate;
 import java.util.Map;
 import java.util.Scanner;
 
 import com.masai.entity.Address;
 import com.masai.entity.Batches;
 import com.masai.entity.Faculty;
+import com.masai.exceptions.DataNotFoundException;
 import com.masai.exceptions.DuplicateEntryException;
 import com.masai.exceptions.EmptyListException;
 import com.masai.exceptions.InvalidArugumentException;
@@ -21,31 +22,53 @@ import com.masai.services.FacultyServiceExcecut;
 import com.masai.services.FacultyServices;
 import com.masai.utility.AdminCred;
 import com.masai.utility.CheckFileAv;
-import com.masai.utility.GenerateFacID;
+//import com.masai.utility.GenerateFacID;
 
 public class Main {
 
 	//Admin Activity
 	
-	public static void adminActivity(Scanner sc,Map<String , Batches> batches , Map<String , Faculty> faculty) throws InvalidDetailsException, EmptyListException {
+	public static void adminActivity(Scanner sc,Map<String , Batches> batches , Map<String , Faculty> faculty) throws InvalidDetailsException, EmptyListException, InvalidArugumentException , DuplicateEntryException, DataNotFoundException {
 //		System.out.println(batches);
 		adminLoginMethod(sc);
 		FacultyServices fac = new FacultyServiceExcecut();
 		BatchServices batchS = new BatchServiceExecut();
 		int opt = 0;
+		
 		do {
-				System.out.println("Press '1' to view all faculty");
-				opt = sc.nextInt();
+				System.out.println("Press '1' to view all faculty"
+		                            +"\n"+
+						            "Press '2' to create new batch"
+						            +"\n"+
+						            "Press '3' to view all batches"
+						            +"\n"+
+						            "Press '4' to delete a batch"
+						            +"\n"+
+						            "Press '0' to Exit From Admin.");
 				
+				opt = sc.nextInt();
 				switch(opt) {
 				case 1 : 
 					adminViewAllFaculties(faculty , fac);
+					break;
 				case 2 :
 					String addStatus = adminCreateNewBatch(sc , batches , batchS);
 					System.out.println(addStatus);
+					break;
+				case 3 : 
+					adminViewAllBatches(batches , batchS);
+					break;
+				case 4 : 
+					deleteABatch(sc , batches , batchS);
+					break;
+				case 0 :
+					System.out.println("Successfully Existed from Admin.");
+					break;
+				default : 
+					throw new InvalidArugumentException("Please Select a Valid one");
 				}
 				
-		}while(opt<=1);
+		}while(opt!=0);
 		
 	}
 	
@@ -53,8 +76,6 @@ public class Main {
 	public static void adminViewAllFaculties(Map<String , Faculty> faculty , FacultyServices fac) throws EmptyListException {
 		fac.adminViewAllFac(faculty);
 	}
-
-	
 	public static void adminLoginMethod(Scanner sc ) throws InvalidDetailsException  {
 		System.out.println("Enter Your UserName");
 		String userName = sc.next();
@@ -68,28 +89,36 @@ public class Main {
 		  }
 		}
 	
-	public static String adminCreateNewBatch(Scanner sc , Map<String , Batches> batches , BatchServices batchS) {
+	public static String adminCreateNewBatch(Scanner sc , Map<String , Batches> batches , BatchServices batchS) throws DuplicateEntryException {
 		String string = null;
 		
 		System.out.println("id");
-		String id = sc.nextLine();
+		String id = sc.next();
 		System.out.println("courseName");
-		String courseName = sc.nextLine();
+		String courseName = sc.next();
 		System.out.println("Number of seats");
 		int noOfSeats = sc.nextInt();
 		System.out.println("Start Date");
-		String localDate = sc.nextLine();
+		String localDate = sc.next();
 		System.out.println("Duration");
 		int duration = sc.nextInt();
-		batchS.createNewBatch(id , courseName, noOfSeats, localDate , duration  );
-		return null;
+		Batches newBatch = new Batches(id , courseName, noOfSeats, localDate , duration);
+		string = batchS.createNewBatch( batches,newBatch);
+//		System.out.println(batches);
+		return string;
 		
 	}
-	
-	
-	
-	
-	
+	public static void adminViewAllBatches(Map<String , Batches> batches ,BatchServices batchS) throws EmptyListException {
+		
+		batchS.adViewAllBatches(batches);
+		
+	}
+	public static void deleteABatch(Scanner sc , Map<String , Batches> batches ,BatchServices batchS) throws EmptyListException, DataNotFoundException {
+		System.out.println("Enter Id of the batch you want to delete");
+		String id = sc.next();
+		   batchS.deleteaBatch(id, batches);
+		System.out.println("SuccessFully Deleted"+id+"batch");
+	}
 	
 	public static void facultyActivity(Scanner sc  , Map<String , Faculty> faculty , Map<String , Batches> batches) throws WrongCredsException {
 		// TODO Auto-generated method stub
@@ -142,6 +171,7 @@ public class Main {
 		
 		Map<String , Batches> batches = CheckFileAv.batchFile();
 		Map<String , Faculty> faculty = CheckFileAv.facultyFile();
+//		System.out.println(batches);
 		Scanner sc = new Scanner(System.in);
 		
 		System.out.println("Welcome to Kate School's Batch Management");
@@ -149,7 +179,15 @@ public class Main {
 		try {
 			int pref = 0;
 			do {
-				System.out.println("Enter Your Preferences What do you want ,"+"\n" + " '1'_-_->For Admin Login"+"\n" + " '2' _-_-> For Faculty Login ,"+"\n" + " '3' _-_-> For Faculty SignUp ,"+ " '0'_-_-> For Existing the System. " + "\n");
+				System.out.println("Enter Your Preferences What do you want ,"
+			                        +"\n" + 
+						            "Press '1'_-_->For Admin Login"
+			                        +"\n" + 
+						            "Press '2' _-_-> For Faculty Login ,"
+			                        +"\n" + 
+						            "Press '3' _-_-> For Faculty SignUp ," 
+			                        +"\n" + 
+						            "Press '0'_-_-> For Existing the System. " + "\n");
 				
 				pref = sc.nextInt();
 				
