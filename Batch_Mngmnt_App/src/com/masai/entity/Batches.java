@@ -2,6 +2,8 @@ package com.masai.entity;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 import com.masai.utility.GenerateFacID;
 
@@ -11,7 +13,9 @@ public class Batches implements Serializable{
 	private String courseName;
 	private int noOfSeats;
 	private String startDate;
-	private int duration;
+	private int duration; 
+	private String endDate;
+	
 //	public Batches( String courseName, int noOfSeats, String startDate, int duration) {
 //		super();
 //		this.id = courseName+"_"+GenerateFacID.generateID();
@@ -27,10 +31,23 @@ public class Batches implements Serializable{
 		this.noOfSeats = noOfSeats;
 		this.startDate = startDate;
 		this.duration = duration;
+		this.endDate = courseEndDate(startDate, duration);
 	}
 	public Batches() {
        super();		
 	}
+	
+	public String courseEndDate(String startDate , int duration) {
+	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+	
+	LocalDate ld = LocalDate.parse(startDate , dtf);
+	
+	LocalDate endD = ld.plus(duration , ChronoUnit.MONTHS);
+	
+	return endD+"";
+	}
+	
+	
 	public String getId() {
 		return id;
 	}
@@ -61,10 +78,11 @@ public class Batches implements Serializable{
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
+	
 	@Override
 	public String toString() {
-		return "Batche [id=" + id + ", courseName=" + courseName + ", noOfSeats=" + noOfSeats + ", startDate="
-				+ startDate + ", duration=" + duration + "]";
+		return "Batche [ id:-  " + id + ", courseName:- " + courseName + ", noOfSeats:- " + noOfSeats + ", startDate:- "
+				+ startDate+ ", endDate:- " +endDate + ", duration:-" + duration   +  " ]";
 	}
 	
 }

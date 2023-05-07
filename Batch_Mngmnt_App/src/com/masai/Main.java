@@ -1,5 +1,6 @@
 package com.masai;
 
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -125,7 +126,7 @@ public class Main {
 		System.out.println("Enter Id of the batch you want to delete");
 		String id = sc.next();
 		   batchS.deleteaBatch(id, batches);
-		System.out.println("SuccessFully Deleted"+id+"batch from the System...");
+		System.out.println("SuccessFully Deleted "+id+" batch from the System...");
 	}
 	
 	public static void viewAPartBatch(Scanner sc  , Map<String , Batches> batches ,BatchServices batchS) throws DataNotFoundException, EmptyListException {
@@ -149,7 +150,7 @@ public class Main {
 		System.out.println("Enter Following Details to LogIn to System...");
 		System.out.println("Enter Your ID");
 		String id = sc.next();
-		System.out.println("Enter Your Name");
+		System.out.println("Enter Your UserName");
 		String name = sc.next();
 		System.out.println("Enter Your Email");
 		String email = sc.next();
@@ -164,23 +165,23 @@ public class Main {
 		facService.login(id,name, email , pass , faculty);
 	}
 	
-	public static void facultySignup(Scanner sc , Map<String , Faculty> faculty ) throws DuplicateEntryException {
+	public static void facultySignup(Scanner sc , Map<String , Faculty> faculty ) throws DuplicateEntryException, FileNotFoundException, IOException {
 		
 		System.out.println("Enter Following details");
-		System.out.println("Username");
+		System.out.println("Enter Your First Name (last name don't bother)");
 		String userName = sc.next();
-		System.out.println("password");
+		System.out.println("Create a password");
 		String password = sc.next();
-		System.out.println("City");
+		System.out.println("Enter Your City");
 		String city = sc.next();
-		System.out.println("State");
+		System.out.println("Enter Your State");
 		String state = sc.next();
-		System.out.println("ZipCode");
+		System.out.println("Enter Your ZipCode");
 		String zip = sc.next();
-		System.out.println("Landmark");
+		System.out.println("Enter a Landmark");
 		String landmark = sc.next();
 		Address address = new Address(city ,state , zip , landmark);
-		System.out.println("email");
+		System.out.println("Enter Your Email");
 		String email = sc.next();
 		Faculty fac = new Faculty(userName,password,address,email );
 		
