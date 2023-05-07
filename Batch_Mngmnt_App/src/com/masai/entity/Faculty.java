@@ -22,8 +22,6 @@ public class Faculty  extends Users implements Serializable{
 		this.facId = facId;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "Faculty [Id: " + facId + ", UserName: " + getUserName() + ", PassWord: " + getPassWord()

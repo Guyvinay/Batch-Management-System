@@ -63,7 +63,7 @@ public class Batches implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Batches [id=" + id + ", courseName=" + courseName + ", noOfSeats=" + noOfSeats + ", startDate="
+		return "Batche [id=" + id + ", courseName=" + courseName + ", noOfSeats=" + noOfSeats + ", startDate="
 				+ startDate + ", duration=" + duration + "]";
 	}
 	

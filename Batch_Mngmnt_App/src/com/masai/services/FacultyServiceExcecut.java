@@ -13,7 +13,7 @@ public class FacultyServiceExcecut implements FacultyServices {
 	public void signUp(Faculty fac , Map<String , Faculty> faculty) throws DuplicateEntryException {
 		// TODO Auto-generated method stub
 		if(faculty.containsKey(fac.getFacId())) {
-			throw new DuplicateEntryException("This user is Already Registered Entere a different User");
+			throw new DuplicateEntryException("This  with ID: "+fac.getFacId()+" is Already Registered, Register another Faculty");
 		}else {
 			faculty.put(fac.getFacId(), fac);
 		}
@@ -44,7 +44,7 @@ public class FacultyServiceExcecut implements FacultyServices {
 				System.out.println(ent.getValue());
 			}
 		} else {
-			throw new EmptyListException("Enpty Faculty List First Add Few Faculty");
+			throw new EmptyListException("Empty Faculty List, First Add Few Faculty...");
 		}
 	}
 	

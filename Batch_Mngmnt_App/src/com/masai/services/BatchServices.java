@@ -1,6 +1,7 @@
 package com.masai.services;
 
 import java.util.Map;
+import java.util.Scanner;
 
 import com.masai.entity.Batches;
 import com.masai.exceptions.DataNotFoundException;
@@ -15,4 +16,7 @@ public interface BatchServices {
 	
 	public void deleteaBatch(String id , Map<String , Batches> batches) throws EmptyListException , DataNotFoundException;
 	
+	public Batches viewABatchById(String id , Map<String  , Batches> batches)throws DataNotFoundException,EmptyListException;
+
+	public void updateABatch( Scanner sc ,String id , Map<String  , Batches> batches )throws DataNotFoundException;
 }
