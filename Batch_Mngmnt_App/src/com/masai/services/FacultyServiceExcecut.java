@@ -44,7 +44,7 @@ public class FacultyServiceExcecut implements FacultyServices {
 				System.out.println(ent.getValue());
 			}
 		} else {
-			throw new EmptyListException("Empty Faculty List, First Add Few Faculty");
+			throw new EmptyListException("Empty Faculty List, First Add Few Faculty...");
 		}
 	}
 	
