@@ -36,15 +36,19 @@ public class Main {
 		int opt = 0;
 		
 		do {
-				System.out.println("Press '1' to view all faculty"
+				System.out.println( "Press '1' -_-_-> to view all faculty"
 		                            +"\n"+
-						            "Press '2' to create new batch"
+						            "Press '2' -_-_-> to create new Course"
 						            +"\n"+
-						            "Press '3' to view all batches"
+						            "Press '3' -_-_-> to view all Course"
 						            +"\n"+
-						            "Press '4' to delete a batch"
+						            "Press '4' -_-_-> to delete a Course"
 						            +"\n"+
-						            "Press '0' to Exit From Admin.");
+						            "Press '5' -_-_-> to view a particular Course"
+						            +"\n"+
+						            "Press '6' -_-_-> to Update a particular Course"
+						            +"\n"+
+						            "Press '0' -_-_-> to Exit From Admin...");
 				
 				opt = sc.nextInt();
 				switch(opt) {
@@ -52,8 +56,8 @@ public class Main {
 					adminViewAllFaculties(faculty , fac);
 					break;
 				case 2 :
-					String addStatus = adminCreateNewBatch(sc , batches , batchS);
-					System.out.println(addStatus);
+					adminCreateNewBatch(sc , batches , batchS);
+					
 					break;
 				case 3 : 
 					adminViewAllBatches(batches , batchS);
@@ -61,8 +65,14 @@ public class Main {
 				case 4 : 
 					deleteABatch(sc , batches , batchS);
 					break;
+				case 5 : 
+					viewAPartBatch(sc , batches , batchS);
+					break;	
+				case 6 : 
+					updateAPartBatch(sc , batches , batchS);
+					break;		
 				case 0 :
-					System.out.println("Successfully Existed from Admin.");
+					System.out.println("Successfully Existed from Admin...");
 					break;
 				default : 
 					throw new InvalidArugumentException("Please Select a Valid one");
@@ -71,7 +81,6 @@ public class Main {
 		}while(opt!=0);
 		
 	}
-	
 	
 	public static void adminViewAllFaculties(Map<String , Faculty> faculty , FacultyServices fac) throws EmptyListException {
 		fac.adminViewAllFac(faculty);
@@ -85,27 +94,26 @@ public class Main {
 		if(userName.equals(AdminCred.userName) && pass.equals(AdminCred.passWord)) {
 			System.out.println("Admin SuccessFully Logged In.");
 		} else {
-			throw new InvalidDetailsException("Entered Credentials are not in place.");
+			throw new InvalidDetailsException("Entered Credentials are not in place, Try Again...");
 		  }
 		}
 	
-	public static String adminCreateNewBatch(Scanner sc , Map<String , Batches> batches , BatchServices batchS) throws DuplicateEntryException {
+	public static void adminCreateNewBatch(Scanner sc , Map<String , Batches> batches , BatchServices batchS) throws DuplicateEntryException {
 		String string = null;
-		
-		System.out.println("id");
+		System.out.println("Enter Following Creds to Create a New Course");
+		System.out.println("Enter a Unique ID :-");
 		String id = sc.next();
-		System.out.println("courseName");
+		System.out.println("Enter Course Name :-");
 		String courseName = sc.next();
-		System.out.println("Number of seats");
+		System.out.println("Enter Number of Seats for Course :- "+courseName);
 		int noOfSeats = sc.nextInt();
-		System.out.println("Start Date");
+		System.out.println("Enter a Start Date for Course :- "+courseName);
 		String localDate = sc.next();
-		System.out.println("Duration");
+		System.out.println("Enter Duration for Course :- "+courseName);
 		int duration = sc.nextInt();
 		Batches newBatch = new Batches(id , courseName, noOfSeats, localDate , duration);
 		string = batchS.createNewBatch( batches,newBatch);
-//		System.out.println(batches);
-		return string;
+		System.out.println(string);
 		
 	}
 	public static void adminViewAllBatches(Map<String , Batches> batches ,BatchServices batchS) throws EmptyListException {
@@ -117,20 +125,35 @@ public class Main {
 		System.out.println("Enter Id of the batch you want to delete");
 		String id = sc.next();
 		   batchS.deleteaBatch(id, batches);
-		System.out.println("SuccessFully Deleted"+id+"batch");
+		System.out.println("SuccessFully Deleted"+id+"batch from the System...");
 	}
+	
+	public static void viewAPartBatch(Scanner sc  , Map<String , Batches> batches ,BatchServices batchS) throws DataNotFoundException, EmptyListException {
+		System.out.println("Enter Id of the batch you want to See");
+		String id = sc.next();
+	Batches batch =	batchS.viewABatchById(id, batches);
+	System.out.println(batch);
+	}
+	
+	public static void updateAPartBatch(Scanner sc  , Map<String , Batches> batches ,BatchServices batchS)throws DataNotFoundException {
+		System.out.println("Enter Id of the batch you want to Update");
+		String id = sc.next();
+		batchS.updateABatch(sc, id, batches);
+	}
+	
+	
 	
 	public static void facultyActivity(Scanner sc  , Map<String , Faculty> faculty , Map<String , Batches> batches) throws WrongCredsException {
 		// TODO Auto-generated method stub
 		FacultyServices  facService = new FacultyServiceExcecut();
-		System.out.println("enter Details");
-		System.out.println("ID");
+		System.out.println("Enter Following Details to LogIn to System...");
+		System.out.println("Enter Your ID");
 		String id = sc.next();
-		System.out.println("Name");
+		System.out.println("Enter Your Name");
 		String name = sc.next();
-		System.out.println("email");
+		System.out.println("Enter Your Email");
 		String email = sc.next();
-		System.out.println("Password");
+		System.out.println("Enter Your Password");
 		String pass = sc.next();
 		facultyLogin(id , name , email, pass ,faculty ,facService);
 	    System.out.println(" Faculty "+ name+" SuccessFully Logged In...");	
@@ -174,20 +197,20 @@ public class Main {
 //		System.out.println(batches);
 		Scanner sc = new Scanner(System.in);
 		
-		System.out.println("Welcome to Kate School's Batch Management");
+		System.out.println("Welcome to Kate Batch Management System");
 		
 		try {
 			int pref = 0;
 			do {
-				System.out.println("Enter Your Preferences What do you want ,"
+				System.out.println("Enter Your Preferences, What do you want ,"
 			                        +"\n" + 
-						            "Press '1'_-_->For Admin Login"
+						            "Press '1' -_-_-> For Admin Login"
 			                        +"\n" + 
-						            "Press '2' _-_-> For Faculty Login ,"
+						            "Press '2' -_-_-> For Faculty Login ,"
 			                        +"\n" + 
-						            "Press '3' _-_-> For Faculty SignUp ," 
+						            "Press '3' -_-_-> For Faculty SignUp ," 
 			                        +"\n" + 
-						            "Press '0'_-_-> For Existing the System. " + "\n");
+						            "Press '0' -_-_-> For Existing the System. " + "\n");
 				
 				pref = sc.nextInt();
 				
