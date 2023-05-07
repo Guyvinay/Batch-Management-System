@@ -24,8 +24,8 @@ public class Faculty  extends Users implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Faculty [Id: " + facId + ", UserName: " + getUserName() + ", PassWord: " + getPassWord()
-				+ ", Address: " + getAddress() + ", Email: " + getEmail() + "]";
+		return "Faculty [Id:- " + facId + ", UserName:- " + getUserName() + ", PassWord:- " + getPassWord()
+				+ ", Address:- " + getAddress() + ", Email:- " + getEmail() + "]";
 	}
 
 	
