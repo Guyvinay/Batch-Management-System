@@ -49,6 +49,8 @@ public class Main {
 						            +"\n"+
 						            "Press '6' -_-_-> to Update a particular Course"
 						            +"\n"+
+						            "Press '7' -_-_-> to Assign a faculty to a Course"
+						            +"\n"+
 						            "Press '0' -_-_-> to Exit From Admin...");
 				
 				opt = sc.nextInt();
@@ -71,6 +73,9 @@ public class Main {
 					break;	
 				case 6 : 
 					updateAPartBatch(sc , batches , batchS);
+					break;	
+				case 7 : 
+					assignFaculty(sc ,faculty, batches , batchS);
 					break;		
 				case 0 :
 					System.out.println("Successfully Existed from Admin...");
@@ -100,7 +105,7 @@ public class Main {
 		}
 	
 	public static void adminCreateNewBatch(Scanner sc , Map<String , Batches> batches , BatchServices batchS) throws DuplicateEntryException {
-		String string = null;
+		String string = null; 
 		System.out.println("Enter Following Creds to Create a New Course");
 		System.out.println("Enter a Unique ID :-");
 		String id = sc.next();
@@ -141,6 +146,12 @@ public class Main {
 		String id = sc.next();
 		batchS.updateABatch(sc, id, batches);
 	}
+	
+	public static void assignFaculty(Scanner sc ,Map<String , Faculty> faculty,  Map<String , Batches> batches ,BatchServices batchS )throws DataNotFoundException {
+		batchS.assignAFacultyToBactch(sc, batches ,faculty);
+	}
+	
+	
 	
 	
 	

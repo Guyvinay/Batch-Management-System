@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import com.masai.entity.Batches;
+import com.masai.entity.Faculty;
 import com.masai.exceptions.DataNotFoundException;
 import com.masai.exceptions.DuplicateEntryException;
 import com.masai.exceptions.EmptyListException;
@@ -186,7 +187,7 @@ public class BatchServiceExecut implements BatchServices{
 			System.out.println("Enter the Updated Name of Course");
 			String newName = sc.next();
 			 batch.setCourseName(newName);
-			 System.out.println("Name of the Course of ID: "+batch.getId()+" Changed from:"+oN+" to " + newName);
+			 System.out.println("Name of the Course of ID: "+batch.getId()+" Changed from:"+oN+" to..." + newName);
 			 ObjectOutputStream batchSt;
 				try {
 					batchSt = new ObjectOutputStream(new FileOutputStream("BatchFile.ser"));
@@ -201,6 +202,41 @@ public class BatchServiceExecut implements BatchServices{
 		}else {
 			throw new DataNotFoundException("Entered Course ID is not present in the database");
 		}
+		
+	}
+
+	@Override
+	public void assignAFacultyToBactch(Scanner sc , Map<String, Batches> batches, Map<String, Faculty> faculty) throws DataNotFoundException {
+		// TODO Auto-generated method stub
+		
+		System.out.println("Enter ID of the batch to which you want to assign a faculty...");
+		String id = sc.next();
+	if(batches.containsKey(id)) {
+		Batches batch = batches.get(id);
+		System.out.println("Enter ID of the Faculty to which course "+id+" is being assigned...");
+		String asFac = sc.next();
+		if(faculty.containsKey(asFac)){
+			batch.setFaculty(asFac);
+			ObjectOutputStream batchSt;
+			try {
+				batchSt = new ObjectOutputStream(new FileOutputStream("BatchFile.ser"));
+				batchSt.writeObject(batches);
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println("Course with ID"+batch.getId()+" is Successfully Assigned to "+asFac);
+		}else {
+			throw new DataNotFoundException("Entered Faculty ID is not present in the database...");
+		}
+//		System.out.println(batch);
+	}else {
+		throw new DataNotFoundException("Entered Course ID is not present in the database");
+	}
+		
 		
 	}
 }
