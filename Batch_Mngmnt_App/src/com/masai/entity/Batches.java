@@ -4,18 +4,19 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-
-import com.masai.utility.GenerateFacID;
-
 public class Batches implements Serializable{
 
 	private String id;
 	private String courseName;
 	private int noOfSeats;
+	
 	private String startDate;
 	private int duration; 
 	private String endDate;
+	private String faculty;
 	
+	
+
 //	public Batches( String courseName, int noOfSeats, String startDate, int duration) {
 //		super();
 //		this.id = courseName+"_"+GenerateFacID.generateID();
@@ -78,10 +79,18 @@ public class Batches implements Serializable{
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
+	public String getFaculty() {
+		return faculty;
+	}
+	public void setFaculty(String faculty) {
+		this.faculty = faculty;
+	}
+
 	
+//	String st = (faculty!=null)?"Not assigned":faculty;
 	@Override
 	public String toString() {
-		return "Batche [ id:-  " + id + ", courseName:- " + courseName + ", noOfSeats:- " + noOfSeats + ", startDate:- "
+		return "Batch [ id:-  " + id +" faculty:- " + faculty + " , courseName:- " + courseName + ", noOfSeats:- " + noOfSeats + ", startDate:- "
 				+ startDate+ ", endDate:- " +endDate + ", duration:-" + duration   +  " ]";
 	}
 	
