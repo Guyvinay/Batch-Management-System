@@ -1,8 +1,6 @@
 # merry-tail-9310
-![Kate_BatchMngmnt_System](https://github.com/Guyvinay/merry-tail-9310/assets/119345842/f6afb392-db5f-4a61-b86e-f4215337a8c3)
+![Kate_BatchMngmnt_System](https://github.com/Guyvinay/merry-tail-9310/assets/119345842/f6afb392-db5f-4a61-b86e-f4215337a8c3);
 Kate Batch Management System
-# Batch Monitoring System
-
 ## Domain Description:
 
 In an educational Institute, there are several batches running every day for 
