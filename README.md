@@ -13,6 +13,8 @@ assigned to which faculty.
 
 - Administrator
 - Faculty
+- 
+![image](https://github.com/Guyvinay/merry-tail-9310/assets/119345842/78504473-6578-4119-9491-628c82f64dd6)
 
 ## Role of Administrator:
 
@@ -40,3 +42,14 @@ assigned to which faculty.
 ```
 
 ## Role of Faculty:
+- Register
+
+- Log in to his/her account at the time of login faculty id, name, username, and 
+  password must be taken.
+![image](https://github.com/Guyvinay/merry-tail-9310/assets/119345842/bb9b7864-51a4-4165-bbeb-8838332c2245)
+
+- See the batches assigned (Display batch id, course name, start date, duration, date 
+  when batch assigned to him).
+
+- Delete account.
+- 
